@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app>
+               <!-- 시큐리티 역할을 설정하도록 security-role 요소를 작성합니다. -->
+	<security-role>
+		<role-name>role1</role-name>
+	</security-role>
+
+               <!-- 시큐리티 제약 사항을 설정하도록 security-constraint 요소를 작성합니다. -->           	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>JSPBook</web-resource-name>
+                                             <!-- 접근을 제한할 요청 경로를 설정하도록 url-pattern 요소를 작성합니다. -->           	
+			<url-pattern>/ch10/security02.jsp</url-pattern>
+			<!--  중요_3_프로그래밍적 시큐리티 처리 실습을 할때는, 위의 security01.jsp를 security02.jsp 변경 후 저장하고,
+                                                   security02.jsp 파일을 실행해 보시기 바랍니다. 사용자명에는 role1, 비밀번호에는 role1234 를 입력합니다 -->
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description></description>
+			<!-- 권한이 부여된 사용자 이름을 설정하도록 role-name 요소를 작성합니다 -->
+			<role-name>role1</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+        <login-config>
+		<!-- FORM 인증 처리 기법을 설정하도록 auth-method 요소를 작성합니다 -->
+		<auth-method>FORM</auth-method>
+		<!-- 인증 처리를 위한 로그인 및 오류 페이지를 설정하도록 form-login-config 요소를 작성합니다 -->
+		<form-login-config>
+		<!-- 인증 처리를 위한 로그인 페이지를 설정하도록 form-login-page 요소를 작성합니다 -->
+			<form-login-page>/ch10/login_form.jsp</form-login-page>
+		<!-- 인증 실패 시 오류 페이지를 설정하도록 form-error-page 요소를 작성합니다 -->
+			<form-error-page>/ch10/login_failed.jsp</form-error-page>
+		</form-login-config>
+	</login-config>
+
+</web-app>
